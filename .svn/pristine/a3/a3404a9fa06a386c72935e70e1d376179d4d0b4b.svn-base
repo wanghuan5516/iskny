@@ -1,0 +1,56 @@
+﻿/*
+ * author: wei
+ * time: 2015-01-25
+ * 
+ */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+html,body{
+    min-height: 100%;
+    height:100%;
+}
+body {
+    font: 12px "宋体",Arial,Helvetica,sans-serif;
+    color: #756F71;
+    background-color: #E7E8EB;
+}
+a:link, a:visited {
+    text-decoration: none;
+    color: #333;
+}
+article {
+    max-width: 700px;
+    margin: 0px auto;
+    height: 100%;
+    min-height:100%;
+    overflow: hidden;
+    background-color: #fff;
+}
+.index_about {
+    float: left;
+    max-width: 700px;
+    overflow: hidden;
+    background: none repeat scroll 0% 0% transparent;
+    margin: 10px 0px;
+}
+.c_titile { font-size: 22px; margin: 10px 0; text-align: center }
+.box_c { border: #ccc 1px dashed; text-align: center; padding: 5px 0; margin-left: 15px; margin-right: 15px;color: #999;}
+.box_c span { margin: 0 10px; }
+.box_c span a{color: #099;}
+ul.infos { overflow: hidden; margin: 20px 15px 20px 15px; line-height: 28px; font-size: 14px; text-indent: 2em; }
+ul.infos p { margin-bottom: 20px }
+ul.infos p img { display: block; margin: auto }
+.keybq { background: url(/images/6264.png) no-repeat 10px center #F8F8F8; line-height: 30px; height: 30px; padding-left: 40px; border: 1px solid #F0F0F0; margin-left: 10px;margin-right: 10px; }
+.keybq span { color: #099 }
+
+footer {
+    text-align: center;
+    line-height: 40px;
+    border-top: 1px solid #E8E8E8;
+    max-width: 700px;
+    margin: auto;
+    background-color: #fff;
+    clear: both;
+}

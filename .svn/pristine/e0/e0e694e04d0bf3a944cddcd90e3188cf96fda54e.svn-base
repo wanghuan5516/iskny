@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Your description goes here" />
+	<meta name="keywords" content="your,keywords,goes,here" />
+	<meta name="author" content="Your Name" />
+	<link href="css/base.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/css/about.css" media="screen" />
+	<script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="/js/scripts.js"></script>
+	<title>关于我</title>
+</head>
+
+<body>
+<header>
+  <div id="logo"><a href="/"></a></div>
+  <nav class="topnav" id="topnav">
+		<a href="/"><span>首页</span><span class="en">Protal</span></a>
+		<a href="about"><span>关于我</span><span class="en">About</span></a>
+		<a href="life"><span>慢生活</span><span class="en">Life</span></a>
+		<a href="doing"><span>碎言碎语</span><span class="en">Doing</span></a>
+		<a href="share"><span>经验分享</span><span class="en">Share</span></a>
+		<a href="learn"><span>学无止境</span><span class="en">Learn</span></a>
+		<!--
+        	作者：wanghuan5516@qq.com
+        	时间：2015-03-06
+        	描述：留言板备用
+        	<a href="gustbook"><span>留言版</span><span class="en">Gustbook</span></a>
+        -->
+	</nav>
+</header>
+<div id="mainwrap">
+
+<div id="cardstyle">
+	<div id="menuwrap">
+		<ul id="iconmenu">
+			<li><a href="#start" title="Start"><img src="images/icons/start.gif" alt="Start" /></a></li>
+			<li><a href="#bio" title="Biography"><img src="images/icons/bio.gif" alt="Biography" /></a></li>
+			<li><a href="#portfolio" title="Portfolio"><img src="images/icons/portfolio.gif" alt="Portfolio" /></a></li>
+			<li><a href="#social" title="Social links"><img src="images/icons/social.gif" alt="Social links" /></a></li>
+			<li><a href="#custom" title="Custom page"><img src="images/icons/chat.gif" alt="Custom page" /></a></li>
+			<li><a href="#contact" title="Contact me"><img src="images/icons/contact.gif" alt="Contact me" /></a></li>
+		</ul>
+	</div>
+
+	<div id="content">
+		<div id="pagecontainer">
+			<ul>
+				<li id="start" class="section">
+					<h1>一笑阑珊</h1>
+					<p class="tagline">这是我的第一个网站</p>
+				</li>
+
+				<li id="bio" class="section">
+					<h2>关于</h2>
+					<img class="left" src="images/photo.jpg" alt="头像" />
+					<p>我是一枚程序员，为什么要用“枚”这个量词呢？</p>
+					<p>因为硬币也用这个~~</p>
+				</li>
+
+				<li id="portfolio" class="section">
+					<h2>生活</h2>
+					<ul class="poptroxactive">
+						<li><a href="images/portfolio/sample1.jpg"><img src="images/portfolio/sample1_thumbnail.jpg" title="Sample photo #1" alt="" /></a></li>
+						<li><a href="images/portfolio/sample2.jpg"><img src="images/portfolio/sample2_thumbnail.jpg" title="Sample photo #2" alt="" /></a></li>
+						<li><a href="images/portfolio/sample3.jpg"><img src="images/portfolio/sample3_thumbnail.jpg" title="Sample photo #3" alt="" /></a></li>
+						<li><a href="images/portfolio/sample4.jpg"><img src="images/portfolio/sample4_thumbnail.jpg" title="Sample photo #4" alt="" /></a></li>
+						<li><a href="images/portfolio/sample5.jpg"><img src="images/portfolio/sample5_thumbnail.jpg" title="Sample photo #5" alt="" /></a></li>
+						<li><a href="images/portfolio/sample6.jpg"><img src="images/portfolio/sample6_thumbnail.jpg" title="Sample photo #6" alt="" /></a></li>
+						<li><a href="images/portfolio/sample7.jpg"><img src="images/portfolio/sample7_thumbnail.jpg" title="Sample photo #7" alt="" /></a></li>
+						<li><a href="images/portfolio/sample8.jpg"><img src="images/portfolio/sample8_thumbnail.jpg" title="Sample photo #8" alt="" /></a></li>
+					</ul>
+					<p class="portfoliomore"><a href="#portfolio2">下一页</a></p>
+				</li>
+
+				<li id="portfolio2" class="section">
+					<h2>作品</h2>
+					<ul class="poptroxactive">
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+						<li><a href="images/portfolio/sample.jpg"><img src="images/portfolio/sample_thumbnail.jpg" title="Sample photo, showing a small waterfall" alt="" /></a></li>
+					</ul>
+					<p class="portfoliomore"><a href="#portfolio">上一页</a></p>
+				</li>
+
+				<li id="social" class="section">
+					<h2>社交网络</h2>
+					<ul>
+						<li><a href="http://weibo.com/u/1791913975" class="external"><img src="images/icons/wordpress.png" alt="WordPress" />
+						<strong>微博</strong>壹笑阑珊</a></li>
+						<li><a href="#" class="external"><img src="images/icons/mail.png" alt="Mail" /> <strong>GMail</strong> mail@yourdomain.com</a></li>
+						<li><a href="#" class="external"><img src="images/icons/facebook.png" alt="Facebook" />
+						<strong>微信</strong>wanghuan5516</a></li>
+						<li><a href="#" class="external"><img src="images/icons/twitter.png" alt="Twitter" />
+						<strong>QQ</strong> 258841654</a></li>
+						<li><a href="#" class="external"><img src="images/icons/linkedin.png" alt="Linkedin" />
+						<strong>Email</strong>wanghuan5516@qq.com</a></li>
+					</ul>
+				</li>
+
+				<li id="custom" class="section">
+					<h2>详细说明</h2>
+					<p>This is an example of a non-specific page, that can be customized to show whatever you want to display. You can use it for testimonials, product presentations or anything else that you find relevant for your site. Just make sure that the height of your content is within the height of the layout, as longer content will not be displayed.</p>
+				</li>
+	
+				<li id="contact" class="section">
+					<h2>联系方式</h2>
+					<div id="address">
+						<h3>王伟强</h3>
+						<p>河南省<br />
+						新乡市<br />
+						红旗区</p>
+						<p>QQ: 258841654<br />
+						E-mail: <a href="#">wanghuan5516@qq.com</a>
+						</p>
+					</div>
+					<div id="map">
+						<img alt="Sample map" src="http://api.map.baidu.com/staticimage?center=116.403874,39.914888&width=300&height=200&zoom=11" />           
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="footer">
+	© 2015 <a href="/admin/login">一笑阑珊</a> &middot; Powered by <a href="/" title="蜗牛名片">蜗牛名片</a>
+</div>
+  <script src="js/silder.js"></script>
+<script type="text/javascript">
+$('.poptroxactive').each(function() {
+   $(this).poptrox();
+});
+</script>
+</div>
+</body>
+</html>

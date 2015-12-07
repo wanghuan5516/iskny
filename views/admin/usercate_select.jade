@@ -1,0 +1,12 @@
+//- Created by 伟强 on 2015/3/14.
+-var selected = {};
+-var type = data&&data.type||conditions&&conditions.type||"";
+-selected[type]="selected";
+select#catid.required(name='type')
+  option(value='') 请选择
+  each val,key in ["后台添加，注册"]
+    -if(selected[val]){
+        option(value='#{val}',selected="selected" ) #{val}
+    -}else{
+        option(value='#{val}' ) #{val}
+    -}

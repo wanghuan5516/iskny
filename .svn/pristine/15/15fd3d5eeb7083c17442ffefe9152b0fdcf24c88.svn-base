@@ -1,0 +1,93 @@
+//
+   Created by 伟强 on 2015/3/8.
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title 蜗牛名片-后台管理
+    link(rel='stylesheet', type='text/css', href='/css/common.css')
+    link(rel='stylesheet', type='text/css', href='/css/main.css')
+    script(type='text/javascript', src='/js/libs/modernizr.min.js')
+    block head
+  body
+    .topbar-wrap.white
+      .topbar-inner.clearfix
+        .topbar-logo-wrap.clearfix
+          h1.topbar-logo.none
+            a.navbar-brand(href='/admin') 后台管理
+          ul.navbar-list.clearfix
+            li
+              a.on(href='/admin') 首页
+            li
+              a(href='/', target='_blank') 网站首页
+        .top-info-wrap
+          ul.top-info-list.clearfix
+            li
+              a(href='#') 管理员
+            li
+              a(href='#') 修改密码
+            li
+              a(href='#') 退出
+    .container.clearfix
+      .sidebar-wrap
+        .sidebar-title
+          h1 菜单
+        .sidebar-content
+          ul.sidebar-list
+            li
+              a(href='#')
+                i.icon-font 
+                | 常用操作
+              ul.sub-menu
+                li
+                  a(href='/admin/blogs')
+                    i.icon-font 
+                    | 作品管理
+                li
+                  a(href='/admin/blogs')
+                    i.icon-font 
+                    | 博文管理
+                li
+                  a(href='javascript:alert("/admin/categories")')
+                    i.icon-font 
+                    | 分类管理
+                li
+                  a(href='/admin/blogsl')
+                    i.icon-font 
+                    | 留言管理
+                li
+                  a(href='/admin/blogs')
+                    i.icon-font 
+                    | 评论管理
+                li
+                  a(href='/admin/blogs')
+                    i.icon-font 
+                    | 友情链接
+                li
+                  a(href='/admin/blogs')
+                    i.icon-font 
+                    | 广告管理
+            li
+              a(href='#')
+                i.icon-font 
+                | 系统管理
+              ul.sub-menu
+                li
+                  a(href='/system.html')
+                    i.icon-font 
+                    | 系统设置
+                li
+                  a(href='/system.html')
+                    i.icon-font 
+                    | 清理缓存
+                li
+                  a(href='/system.html')
+                    i.icon-font 
+                    | 数据备份
+                li
+                  a(href='/system.html')
+                    i.icon-font 
+                    | 数据还原
+      // /sidebar
+      block content
+

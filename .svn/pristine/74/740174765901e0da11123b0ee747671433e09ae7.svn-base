@@ -1,0 +1,139 @@
+var express = require('express');
+var router = express.Router();
+var setResultInfo = function(req,info){
+    req.session.info = info;
+};
+var showResultInfo = function(req,data){
+    if(req.session.info){
+        data.info=req.session.info;
+        delete req.session.info;
+    }
+};
+var loginAuthCheck = function(req,res,next){
+    if(req.session.username){
+        next();
+    }else{
+        setResultInfo(req,"操作需要登录");
+        res.redirect("/admin/login");
+    }
+};
+
+/* GET home page. */
+router.get('/', loginAuthCheck,function(req, res, next) {
+  res.render('admin/index', { title: '管理后台首页' });
+});
+
+/* GET login page. */
+router.get('/login', function(req, res, next) {
+    var data = {title: '管理后台登录'};
+    showResultInfo(req,data);
+    res.render('admin/login', data);
+});
+router.post('/login', function(req, res, next) {
+    var username=req.body.username;
+    var pass=req.body.password;
+    if(username=="iskny"&&pass=="12qazwsx.iskny"){
+        req.session.username = username;
+        res.redirect("/admin");
+    }else{
+        setResultInfo(req,"用户名或密码错误");
+        res.redirect("/admin/login");
+    }
+
+});
+var BlogModel = require("./models/blogs");
+
+/* GET blogs page. */
+router.get('/blogs',loginAuthCheck, function(req, res, next) {
+    var data = {};
+    data.title = "博客管理";
+    showResultInfo(req,data);
+    BlogModel.find(function(err,datas){
+        if(err){
+            handleError(err,next);
+        }else{
+            data.datas = datas;
+            res.render('admin/blogs', data);
+        }
+    });
+});
+router.get('/blog', function(req, res, next) {
+    res.render('admin/blog', { title: '添加文章'});
+});
+router.post('/blog', function(req, res, next) {
+    var blog = getPostBlog(req);
+    new BlogModel(blog).save(function(err){
+            if(err){
+                handleError(err,next);
+            }else{
+                setResultInfo(req,"添加成功");
+                res.redirect("/admin/blogs");
+            }
+
+    });
+//    res.render('admin/blog', { title: '添加文章'});
+});
+router.get('/blog/:id/delete', function(req, res, next) {
+    var blog;
+    var id = req.params["id"];
+    if(id){
+        BlogModel.findByIdAndRemove(id,function(err,data){
+            if(err){
+                handleError(err,next);
+            }else{
+                setResultInfo(req,"删除成功");
+                res.redirect("/admin/blogs");
+            }
+        });
+    }else{
+        next();
+    }
+
+});
+router.get('/blog/:id', function(req, res, next) {
+    var blog;
+    var id = req.params["id"];
+    if(id){
+        BlogModel.findOne({_id:id},function(err,data){
+            if(err){
+                handleError(err,next);
+            }else{
+                res.render('admin/blog', { title: '博客管理' ,data:data});
+            }
+        });
+    }
+
+});
+router.post('/blog/:id', function(req, res, next) {
+    var blog = getPostBlog(req);
+    var id = req.params["id"];
+
+    if(id){
+        BlogModel.findByIdAndUpdate(id,blog,function(err,data){
+            if(err){
+                handleError(err,next);
+            }else{
+                res.render('admin/blog', { title: '博客管理' ,data:data});
+            }
+        });
+    }
+
+});
+
+function getPostBlog(req){
+    var body = req.body;
+    var blog = {
+        title:body.title,
+        author:body.author,
+        type:body.type,
+        sort:body.sort,
+        content:body.content
+    };
+    return blog;
+}
+function handleError(err,next){
+    console.log(err);
+    next(err);
+}
+
+module.exports = router;

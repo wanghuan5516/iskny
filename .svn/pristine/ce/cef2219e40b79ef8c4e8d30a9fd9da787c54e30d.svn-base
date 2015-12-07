@@ -1,0 +1,45 @@
+extend layout/blogs
+block head
+  link(href='/css/new.css', rel='stylesheet')
+  link(href='/css/styles.css', rel='stylesheet')
+block content_nav
+  h1.t_nav
+    span
+      | 您当前的位置：
+      a(href='/index.html') 首页
+      |  >
+      a(href='/life') 慢生活
+      |  >
+      a(href='/cate') 日记
+    a.n1(href='/') 网站首页
+    a.n2(href='/cate') 日记
+block blogs
+  .index_about
+    h2.c_titile #{data.title}
+    p.box_c
+      span.d_time 发布时间：#{data.time.format()}
+      span 编辑：#{data.author}
+      span 点击：#{data.clicks}
+    ul.infos
+      | !{data.content}
+    .keybq
+      p
+        span 关键字词
+        | ：#{data.keywords||data.title}
+    .ad
+    .nextinfo
+      -if(prev!=null){
+        p
+          | 上一篇：
+          a(href='/blog/#{prev._id}') #{prev.title.limit(15)}
+       -}
+      -if(next!=null){
+        p
+          | 下一篇：
+          a(href='/blog/#{next._id}') #{next.title.limit(15)}
+      -}
+    .otherlink
+      h2 相关文章
+      each blog,index in global.cache_blog["bottom"]
+        li
+          a(href='/blog/#{blog._id}', title='#{blog.title}', target='_blank') #{blog.title}

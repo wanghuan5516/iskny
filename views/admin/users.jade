@@ -1,0 +1,64 @@
+extends ../layout/admin
+block head
+  include ../shared/pager_head
+  script.
+    function deleteUser(){
+        return confirm("确定要删除吗？");
+    }
+block content
+  .main-wrap
+    .crumb-wrap
+      .crumb-list
+        i.icon-font 
+        a(href='/admin') 首页
+        span.crumb-step >
+        span.crumb-name 用户管理
+        include ../shared/result_info
+    .search-wrap
+      .search-content
+        form(action='', method='get')
+          table.search-tab
+            tr
+              th(width='120') 选择分类:
+              td
+
+              th(width='70') 标题:
+              td
+                input.common-text(placeholder='标题', name='title', value='#{conditions.title||""}', id='', type='text')
+              td
+                input.btn.btn-primary.btn2( value='查询', type='submit')
+    .result-wrap
+      form#myform(name='myform', method='post')
+        .result-title
+          .result-list
+            a(href='/admin/user')
+              i.icon-font 
+              | 新增用户
+            a#batchDel(href='javascript:void(0)')
+              i.icon-font 
+              | 批量删除
+            a#updateOrd(href='javascript:void(0)')
+              i.icon-font 
+              | 更新排序
+        .result-content
+          -var from = 1;
+          table.result-tab(width='100%')
+            tr
+              th 登录名
+              th 昵称
+              th 类型
+              th 状态
+              th 创建时间
+              th 操作
+            each item,index in datas
+              tr(title='#{item.time&&item.time.format()}')
+                td
+                  a( href='/admin/user/#{item._id}') #{item.loginname}
+                td #{item.nickname}
+                td #{item.type}
+                td #{item.state}
+                td #{item.time&&item.time.format()}
+                td
+                  a.link-del(href='/admin/user/#{item._id}/delete',onclick="return deleteUser();") 删除
+          include ../shared/pager_html
+    // /main

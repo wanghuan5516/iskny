@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title 蜗牛名片|个人名片|个人信息整理|#{title}
+    meta(name='keywords', content='蜗牛名片|蜗牛私信|个人名片|个人信息整理|个人博客')
+    meta(name='description', content='个人名片，为个人发展提供助力，为同道中人扫清道路；私人信息整理，我的私人档案')
+    link(href='/css/base.css', rel='stylesheet')
+    block head
+    |<!--[if lt IE 9]>
+    script(src='/js/modernizr.js')
+    |<![endif]-->
+  body
+    header
+      #logo
+        a(href='/')
+      nav#topnav.topnav
+        a(href='/')
+          span 首页
+          span.en Protal
+        a(href='/about')
+          span 关于我
+          span.en About
+        a(href='/life')
+          span 慢生活
+          span.en Life
+        a(href='/doing')
+          span 碎言碎语
+          span.en Doing
+        a(href='/share')
+          span 经验分享
+          span.en Share
+        a(href='/learn')
+          span 学无止境
+          span.en Learn
+        //
+          作者：wanghuan5516@qq.com
+          时间：2015-03-06
+          描述：留言板备用
+          <a href="gustbook"><span>留言版</span><span class="en">Gustbook</span></a>
+    block header
+    block content
+    block footer
+      footer
+        p
+          | Powered by 
+          a(href='/about') 一笑阑珊
+          |&nbsp;
+          a(target='_blank', href='http://www.miitbeian.gov.cn/') 豫ICP备15004495号-1
+    script(src='/js/silder.js')

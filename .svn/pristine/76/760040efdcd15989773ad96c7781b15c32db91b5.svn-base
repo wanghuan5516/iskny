@@ -1,0 +1,14 @@
+var express = require('express');
+var router = express.Router();
+var utils = require('../utils');
+//各个模块的入口
+
+
+
+/* GET home page. */
+router.get('/', function(req, res) {
+  req.session.username="一笑阑珊";
+  res.render(utils.path(req.viewdir,'index'), { title: '首页',username:req.session.username });
+});
+
+module.exports = router;

@@ -1,0 +1,25 @@
+extend layout/blogs
+block head
+  link(href='/css/style.css', rel='stylesheet')
+block blogs
+  .newblog.left
+    each item,index in datas
+      h2 #{item.title}
+      p.dateview
+        span 发布时间：#{item.time.format()}
+        span 作者：#{item.author}
+        span
+          | 分类：[
+          a(href='/cate') #{cate.getCate(item.type)}
+          | ]
+      -var img = "/images/default.jpg";
+      -if(item.imgpath&&item.imgpath!='undefined')img=item.imgpath;
+      figure
+        img(src='#{img}')
+      ul.nlist
+        p
+          | !{item.content.limit(250)}
+        a.readmore(title='点击阅读', href='/blog/#{item._id}') 阅读全文>>
+      .line
+    .blank
+    include ./shared/pager_front

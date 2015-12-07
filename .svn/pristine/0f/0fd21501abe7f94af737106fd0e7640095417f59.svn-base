@@ -1,0 +1,67 @@
+extends ../layout/admin
+
+block content
+  .main-wrap
+    .crumb-wrap
+      .crumb-list
+        i.icon-font 
+        span 欢迎登录蜗牛名片后台
+    .result-wrap
+      .result-title
+        h1 快捷操作
+      .result-content
+        .short-wrap
+          a(href='/admin/blog')
+            i.icon-font 
+            | 新增作品
+          a(href='#')
+            i.icon-font 
+            | 新增博文
+          a(href='#')
+            i.icon-font 
+            | 新增作品分类
+          a(href='#')
+            i.icon-font 
+            | 新增博客分类
+          a(href='#')
+            i.icon-font 
+            | 作品评论
+    .result-wrap
+      .result-title
+        h1 系统基本信息
+      .result-content
+        ul.sys-info-list
+          li
+            label.res-lab 操作系统
+            span.res-info Ubuntu14.04
+          li
+            label.res-lab 运行环境
+            span.res-info Apache/2.2.21 (Linux64) nodejs
+          li
+            label.res-lab 上传附件限制
+            span.res-info 2M
+          li
+            label.res-lab 北京时间
+            span.res-info #{new Date().format("yyyy年MM月dd日 hh:mm:ss")}
+          li
+            label.res-lab 服务器域名/IP
+            span.res-info localhost [ 127.0.0.1 ]
+          li
+            label.res-lab Host
+            span.res-info 127.0.0.1
+    .result-wrap
+      .result-title
+        h1 使用帮助
+      .result-content
+        ul.sys-info-list
+          li
+            label.res-lab 官方交流网站：
+            span.res-info
+              a(href='http://www.mycodes.net/', target='_blank') 源码之家
+          li
+            label.res-lab 官方交流QQ群：
+            span.res-info
+              a.qq-link(target='_blank', href='http://shang.qq.com/wpa/qunwpa?idkey=4ba39c297a33fa548de56a257f6128c7c9e3dd14473e4c86557d93f2197c33e8')
+                img(border='0', src='http://pub.idqqimg.com/wpa/images/group.png', alt='JS-前端开发', title='JS-前端开发')
+    // /main
+

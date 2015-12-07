@@ -1,0 +1,33 @@
+/**
+ * Created by 伟强 on 2015/3/12.
+ */
+var mongodb = require('./mongodb');
+
+var Schema = mongodb.mongoose.Schema;
+// Schema 结构
+var mongooseSchema = new Schema({
+    author : {type : String, default : 'admin'},
+    title    :  {type : String, default : '碎言碎语'},
+    type:String,
+    imgpath:String,
+    content  : String,
+    time     : {type : Date, default: Date.now},
+    sort      : {type : Number, default: 0},
+    state     : {type : Number, default: 0},
+    clicks:{type : Number, default: 0}
+});
+
+// 添加 mongoose 实例方法
+mongooseSchema.methods.findByAuthor = function(author, callback) {
+    return this.model('blogs').find({author: author}, callback);
+}
+
+// 添加 mongoose 静态方法，静态方法在Model层就能使用
+mongooseSchema.statics.findByTitle = function(title, callback) {
+    return this.model('blogs').find({title: title}, callback);
+}
+
+// model
+var mongooseModel = mongodb.mongoose.model('blogs', mongooseSchema);
+
+module.exports = mongooseModel;

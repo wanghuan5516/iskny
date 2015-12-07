@@ -1,0 +1,25 @@
+//-Created by 伟强 on 2015/3/14.
+.flickr
+  -if(pager.totals==0){
+    |暂无数据
+  -}else{
+    | 共
+    b.blue #{pager.totals}
+    | 条,
+    b.blue  #{pager.pages}
+    |页
+    -if(pager.page!=pager.prev)
+      a(href="#{pageUrl.replace('page',1)}") 首页
+      a(href="#{pageUrl.replace('page',pager.prev)}") 上页
+    -var pagerIndex = 0;
+    //-直接用for循环从from到to不行，不知道啥原因
+    each val,index in pager.pageIndex
+      -if(val==pager.page)
+        a.ahover(href="#{pageUrl.replace('page',val)}") #{val}
+      -else
+        a(href="#{pageUrl.replace('page',val)}") #{val}
+    -if(pager.page!=pager.next)
+      a(href="#{pageUrl.replace('page',pager.next)}") 下页
+      a(href="#{pageUrl.replace('page',pager.pages)}") 尾页
+  -}
+  //-|#{pager}测试的时候，看看这个里面都啥东西

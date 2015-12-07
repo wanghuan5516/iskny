@@ -1,0 +1,26 @@
+/**
+ * Created by 伟强 on 2015/3/8.
+ */
+var formidable = require('formidable'),
+    path = require('path');
+
+exports.parse = function(req,res,type){
+
+    var form = new formidable.IncomingForm();
+    form.ecoding = "utf-8";
+    form.keepExtensions = true;
+    form.uploadDir = path.join(__dirname,"public/temp");
+    form.parse(req, function (err, fields, files) {
+        if (err) {
+            console.log(err);
+            res.json({status:500,msg:"服务器出错"});
+            return;
+        }
+        var data={};
+        data.status = 200;
+        var pa = files.image.path;
+        data.path = pa.substring(pa.indexOf("\\temp")).replace(/\\/g,"/");
+        data.name=files.image.name;
+        res.send(JSON.stringify(data));
+    });
+}

@@ -1,0 +1,6 @@
+var view={};
+view.get = function(path,env){
+	//后续，根据各种情况获取path
+	retutn path;
+}
+module.exports = view;

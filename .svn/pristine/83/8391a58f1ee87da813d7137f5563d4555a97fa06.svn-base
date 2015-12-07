@@ -1,0 +1,156 @@
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+//var cookieSession = require('cookie-session');
+var util = require("util");
+var fs = require('fs');
+
+var utils = require("./utils");
+//var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+var config = global.config= {};
+var category = global.category={"life":"慢生活","doing":"碎言碎语","share":"经验分享","learn":"学无止境","ixuejiao":"爱雪娇"};
+category.getCate = function(cate){
+    var ret = category[cate];
+    return ret||"默认";
+};
+global.pageSize = 10;
+global.pageCount = 6;
+global.pageSize_front = 3;
+global.beian = "豫ICP备15004495号";
+config.modules = ["users","admin","about","life","doing","share","learn","blog","cate"];
+/*
+var SessionStore = require("session-mongoose")(express);
+var store = new SessionStore({
+    url: "mongodb://localhost/session",
+    interval: 120000 // expiration check worker run interval in millisec (default: 60000)
+});*/
+var session = require('express-session'); //如果要使用session，需要单独包含这个模块
+
+var app = express();
+//ceshi2
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.disable('x-powered-by');
+//app.set('env',"production");
+
+// uncomment after placing your favicon in /public
+app.use(favicon(__dirname + '/public/favicon.ico'));
+//static resources
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+//app.use(cookieSession({secret : 'blog.fens.me'}));
+
+app.use(session({
+    key: 'session',
+    secret: 'iskny.wwq',
+	resave:false,
+	saveUninitialized:false,
+    store: require('mongoose-session')(mongoose)
+}));
+app.use('/ixuejiao', require("./routes/ixuejiao"));
+var prepareRender = function(req,res,next){
+	req.viewdir="";
+    res.locals.pretty = true;
+    if(req.query.__json==""){
+        res._renderBack = res.render;
+        res.render = function(view ,data){
+            //防止处理信息返回给接口
+            delete data["conditions"];
+            delete data["pageUrl"];
+            res.json(data);
+        };
+    }
+	next();
+};//设置渲染参数 拦截渲染
+app.use(prepareRender);
+//routes
+app.use('/', require('./routes'));
+regModules(config.modules);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    var msg = err.status==404?"页面未找到":"服务器错误";
+    res.render('error_online', {
+        message: err.message,
+        status:err.status,
+        error: msg
+    });
+});
+
+function regModules(modules){
+    var addModule = function(ab){
+        app.use("/"+ab,require("./routes/"+ab));
+    };
+    if(modules instanceof Array){
+        for(var i=0;i< modules.length;i++){
+            addModule(modules[i]);
+        }
+    }
+}
+//时间格式化
+Date.prototype.format = function(format){
+    var o = {
+        "M+" : this.getMonth()+1, //month
+        "d+" : this.getDate(), //day
+        "h+" : this.getHours(), //hour
+        "m+" : this.getMinutes(), //minute
+        "s+" : this.getSeconds(), //second
+        "q+" : Math.floor((this.getMonth()+3)/3), //quarter
+        "S" : this.getMilliseconds() //millisecond
+    }
+    if(!format){
+        format = "yyyy-MM-dd hh:mm:ss";
+    }
+    if(/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    }
+
+    for(var k in o) {
+        if(new RegExp("("+ k +")").test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+        }
+    }
+    return format;
+};
+String.prototype.limit = function(length){
+	var temp = this.replace(/&nbsp;/ig, "").replace(/<[^>]+>/g,"");//去掉所有的html标记;
+    if(temp.length>=length){
+        return temp.substring(0,length)+"...";
+    }
+    return this;
+
+};
+//Object
+
+module.exports = app;

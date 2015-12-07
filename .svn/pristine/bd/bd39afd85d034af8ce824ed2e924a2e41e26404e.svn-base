@@ -1,0 +1,24 @@
+var express = require('express');
+var router = express.Router();
+var path = require('path');
+//各个模块的入口
+
+
+
+/* GET home page. */
+router.get('/', function(req, res) {
+//  res.render('index', { title: 'Express' });
+	res.sendfile(path.join(__dirname,"../public/index.html"));
+});
+
+router.get('/pieces', function(req, res) {
+	res.send("pieces");
+});
+router.get('/diandi', function(req, res) {
+	res.send("diandi");
+});
+router.get('/endless', function(req, res) {
+	res.send("endless");
+});
+
+module.exports = router;

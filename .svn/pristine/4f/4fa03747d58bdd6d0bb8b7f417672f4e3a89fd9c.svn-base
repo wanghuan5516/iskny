@@ -1,0 +1,39 @@
+var express = require('express');
+var router = express.Router();
+var path = require('path');
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('admin/index', { title: '管理后台首页' });
+});
+
+/* GET login page. */
+router.get('/login', function(req, res, next) {
+    res.render('admin/login', { title: '管理后台登录' });
+});
+router.post('/login', function(req, res, next) {
+    res.redirect("/admin");
+});
+var blogModel = require("./models/blogs");
+
+/* GET blogs page. */
+router.get('/blogs', function(req, res, next) {
+    res.render('admin/blogs', { title: '博客管理' });
+});
+router.get('/blog', function(req, res, next) {
+    res.render('admin/blog', { title: '添加文章'});
+});
+router.post('/blog', function(req, res, next) {
+    blogModel.save({});
+    res.render('admin/blog', { title: '添加文章'});
+});
+router.get('/blog/:id', function(req, res, next) {
+    var blog;
+    if(req.params["id"]){
+        blog = blogModel.findOne({_id:id});
+    }
+    res.render('admin/blog', { title: '博客管理' ,blog:blog});
+});
+
+
+module.exports = router;

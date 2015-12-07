@@ -1,0 +1,156 @@
+extend layout/default
+block head
+  link(type='text/css', rel='stylesheet', href='/css/about.css', media='screen')
+  script(type='text/javascript', src='/js/jquery-1.6.2.min.js')
+  script(type='text/javascript', src='/js/scripts.js')
+block content
+  #mainwrap
+    #cardstyle
+      #menuwrap
+        ul#iconmenu
+          li
+            a(href='#start', title='Start')
+              img(src='images/icons/start.gif', alt='Start')
+          li
+            a(href='#bio', title='Biography')
+              img(src='images/icons/bio.gif', alt='Biography')
+          li
+            a(href='#portfolio', title='Portfolio')
+              img(src='images/icons/portfolio.gif', alt='Portfolio')
+          li
+            a(href='#social', title='Social links')
+              img(src='images/icons/social.gif', alt='Social links')
+          li
+            a(href='#custom', title='Custom page')
+              img(src='images/icons/chat.gif', alt='Custom page')
+          li
+            a(href='#contact', title='Contact me')
+              img(src='images/icons/contact.gif', alt='Contact me')
+      #content
+        #pagecontainer
+          ul
+            li#start.section
+              h1 一笑阑珊
+              p.tagline 这是我的第一个网站
+            li#bio.section
+              h2 关于
+              img.left(src='images/photo.jpg', alt='头像')
+              p 我是一枚程序员，为什么要用“枚”这个量词呢？
+              p 因为硬币也用这个~~
+            li#portfolio.section
+              h2 生活
+              ul.poptroxactive
+                li
+                  a(href='images/portfolio/sample1.jpg')
+                    img(src='images/portfolio/sample1_thumbnail.jpg', title='Sample photo #1', alt='')
+                li
+                  a(href='images/portfolio/sample2.jpg')
+                    img(src='images/portfolio/sample2_thumbnail.jpg', title='Sample photo #2', alt='')
+                li
+                  a(href='images/portfolio/sample3.jpg')
+                    img(src='images/portfolio/sample3_thumbnail.jpg', title='Sample photo #3', alt='')
+                li
+                  a(href='images/portfolio/sample4.jpg')
+                    img(src='images/portfolio/sample4_thumbnail.jpg', title='Sample photo #4', alt='')
+                li
+                  a(href='images/portfolio/sample5.jpg')
+                    img(src='images/portfolio/sample5_thumbnail.jpg', title='Sample photo #5', alt='')
+                li
+                  a(href='images/portfolio/sample6.jpg')
+                    img(src='images/portfolio/sample6_thumbnail.jpg', title='Sample photo #6', alt='')
+                li
+                  a(href='images/portfolio/sample7.jpg')
+                    img(src='images/portfolio/sample7_thumbnail.jpg', title='Sample photo #7', alt='')
+                li
+                  a(href='images/portfolio/sample8.jpg')
+                    img(src='images/portfolio/sample8_thumbnail.jpg', title='Sample photo #8', alt='')
+              p.portfoliomore
+                a(href='#portfolio2') 下一页
+            li#portfolio2.section
+              h2 作品
+              ul.poptroxactive
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+                li
+                  a(href='images/portfolio/sample.jpg')
+                    img(src='images/portfolio/sample_thumbnail.jpg', title='Sample photo, showing a small waterfall', alt='')
+              p.portfoliomore
+                a(href='#portfolio') 上一页
+            li#social.section
+              h2 社交网络
+              ul
+                li
+                  a.external(href='http://weibo.com/u/1791913975')
+                    img(src='images/icons/wordpress.png', alt='WordPress')
+                    strong 微博
+                    | 壹笑阑珊
+                li
+                  a.external(href='#')
+                    img(src='images/icons/mail.png', alt='Mail')
+                    strong GMail
+                    |  mail@yourdomain.com
+                li
+                  a.external(href='#')
+                    img(src='images/icons/facebook.png', alt='Facebook')
+                    strong 微信
+                    | wanghuan5516
+                li
+                  a.external(href='#')
+                    img(src='images/icons/twitter.png', alt='Twitter')
+                    strong QQ
+                    |  258841654
+                li
+                  a.external(href='#')
+                    img(src='images/icons/linkedin.png', alt='Linkedin')
+                    strong Email
+                    | wanghuan5516@qq.com
+            li#custom.section
+              h2 详细说明
+              p
+                | This is an example of a non-specific page, that can be customized to show whatever you want to display. You can use it for testimonials, product presentations or anything else that you find relevant for your site. Just make sure that the height of your content is within the height of the layout, as longer content will not be displayed.
+            li#contact.section
+              h2 联系方式
+              #address
+                h3 王伟强
+                p
+                  | 河南省
+                  br
+                  |             新乡市
+                  br
+                  |             红旗区
+                p
+                  | QQ: 258841654
+                  br
+                  |             E-mail: 
+                  a(href='#') wanghuan5516@qq.com
+              #map
+                img(alt='Sample map', src='http://api.map.baidu.com/staticimage?center=116.403874,39.914888&width=300&height=200&zoom=11')
+    block footer
+    #footer
+      | © 2015 
+      a(href='/admin/login') 一笑阑珊
+      |  · Powered by 
+      a(href='/', title='蜗牛名片') 蜗牛名片
+    script(type='text/javascript').
+      $('.poptroxactive').each(function() {
+      $(this).poptrox();
+      });

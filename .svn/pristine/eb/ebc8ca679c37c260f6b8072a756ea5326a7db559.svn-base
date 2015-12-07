@@ -1,0 +1,171 @@
+extend ../layout/tools
+block head
+  link(href='/css/style.css', rel='stylesheet')
+  include ../shared/jquery
+  style.
+    .content{text-align:center;}
+    .container{width:100%;margin:0 auto;}
+    .r2h,.h2r{ font-size:14px;}
+    .r2h input,.h2r input{height:30px;}
+    .rgb{width:50px;}
+    .res{display:inline-block;width:30px;height:30px;}
+    .pick-container{position:relative;}
+    .color-box{display:inline-block;width:50px;height:50px;}
+    .color-pick{background:#C7EDCC;margin:0 auto;font-size:0;}
+    .color-pick span{display:inline-block;width:4px;height:4px;margin:0;padding:0;}
+    .color-res{position:absolute; top:0;}
+    .color-res input{width:100px;height:30px;}
+    .hide{display:none;}
+  script.
+    var range = 64;//调色板
+    var step = parseInt(256 / range);
+    var b = 0;
+    function getspan(x, y) {
+      return "<span x='" + x + "' y='" + y + "' style='background-color:rgb(" + x + "," + y + "," + b + ")'></span>";
+    }
+    function FillHtml(doc) {
+      var thtml = "";
+      var count = 0;
+      for (var x = 0; x < 256;) {
+        for (var y = 0; y < 256;) {
+          thtml += getspan(x, y);
+          y += step;
+        }
+        thtml += "<br/>";
+        x += step;
+        count++;
+      }
+      if (doc) {
+        document.write(thtml);
+      } else {
+        $("#pickBox").html(thtml);
+      }
+      var t2 = new Date().getTime();
+    }
+    $(function () {
+      var getHexStr = function (data) {
+        try {
+          var i = parseInt(data);
+          var res = i.toString(16).toString().toLowerCase();
+          return res.length == 2 ? res : "0" + res;
+        } catch (e) {
+          return "00";
+        }
+      }
+
+      function toHexStr(R, G, B) {
+        var ret = "";
+        $([R, G, B]).each(function (i, R) {
+          ret += getHexStr(R);
+        });
+        return ret;
+      }
+
+      $("#r2hBth").click(function () {
+        var right = true;
+        var obj = null;
+        $("[ref=r2]").each(function (i, n) {
+          var R = $(n).val();
+          if (!/^\d+$/.test(R) || parseInt(R) < 0 || parseInt(R) > 255) {
+            right = false;
+            obj = n;
+            return right;
+          }
+        });
+        if (right) {
+          var res = "#" + toHexStr($("#R").val(), $("#G").val(), $("#B").val());
+          $("#Res").val(res);
+          $("#showColor").css({"background-color": res}).attr("title", res);
+        } else {
+          alert("数据有错");
+          $(obj).focus();
+        }
+      });
+      var toRgbStr = function (Hex) {
+        var r, g, b;
+        if (Hex.length == 3) {
+          r = Hex.substr(0, 1);
+          g = Hex.substr(1, 1);
+          b = Hex.substr(2, 1);
+          r += r;
+          g += g;
+          b += b;
+        } else {
+          r = Hex.substr(0, 2);
+          g = Hex.substr(2, 2);
+          b = Hex.substr(4, 2);
+        }
+        var res = parseInt(r, 16) + "," + parseInt(g, 16) + "," + parseInt(b, 16);
+        return res;
+      }
+      $("#h2rBth").click(function () {
+        var right = true;
+        var obj = null;
+        var Hex = $("#hexColor").val().replace('#', '');
+        if (!/^[0-9A-Fa-f]+$/.test(Hex) || (Hex.length != 3 && Hex.length != 6)) {
+          alert("数据错误");
+          $("#hexColor").focus();
+          return;
+        }
+        var res = toRgbStr(Hex);
+        $("#Res2").val(res);
+        $("#showColor2").css({"background-color": "rgb(" + res + ")"}).attr("title", res);
+      });
+      $("#pickBox span").hover(function (e) {
+        var res = [$(this).attr("x"), $(this).attr("y"), b].join(",");
+        var css = "rgb(" + res + ")";
+        $("#colorBox").css("background-color", css);
+      }).click(function () {
+        var r = $(this).attr("x"), g = $(this).attr("y");
+        var res = [r, g, b].join(",");
+        var css = "rgb(" + res + ")";
+        $("#pick_rgb").val(css);
+        $("#pick_hex").val("#" + toHexStr(r, g, b));
+        $("#pickBox_res").css({"background-color": css}).attr("title", res);
+      });
+    })
+block blogs
+  .newblog.left
+    .content
+      .container
+        .r2h
+          | RGB转Hex
+          input#R.rgb(type='text', placeholder='R', ref='r2')
+          input#G.rgb(type='text', placeholder='G', ref='r2')
+          input#B.rgb(type='text', placeholder='B', ref='r2')
+          input#r2hBth(type='button', value='转为16进制')
+          input#Res(type='text', placeholder='结果', readonly='')
+          span#showColor.res
+        .h2r
+          | Hex转RGB
+          input#hexColor(type='text', placeholder='16进制颜色')
+          input#h2rBth(type='button', value='转为rgb')
+          input#Res2(type='text', placeholder='R')
+          span#showColor2.res
+        .pick-container
+          #pickBox.color-pick(title='点击拾色')
+            script.
+              FillHtml(true);
+          #colorRes.color-res
+            | 鼠标颜色
+            span#colorBox.color-box
+            br
+            |                 RGB结果
+            input#pick_rgb(type='text', readonly='', placeholder='RGB结果')
+            br
+            |                 Hex结果
+            input#pick_hex(type='text', readonly='', placeholder='Hex结果')
+            br
+            |                 拾取颜色
+            #pickBox_res.color-box
+        div.hide
+          input(type='color')
+        script.
+          //FillHtml(false);
+          var width = $(".container").width();
+          var wh = range * $("#pickBox span:eq(0)").width();//宽高调整
+          $("#pickBox").css({width: wh, height: wh});
+          $("#pickBox").css({left: width / 2 + wh / 2});
+          //document.write("<style>.color-pick span{display:inline-block;width:" + step + "px;height:" + step + "px;margin:0;padding:0;}</style>");
+
+                      

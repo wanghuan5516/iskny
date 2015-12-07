@@ -1,0 +1,35 @@
+//-Created by 伟强 on 2015/3/14.
+div.upload-container
+  span.upload-span
+    input#uploadFile.upload-file(type='file',name="image",size='1')
+    input#uploadImgpath(type='hidden',name="imgpath",value="#{data.imgpath}")
+    a(id="uploadBtn",href='javascript:void(0);') 上传图片
+  span#uploadResult
+    -if(data.imgpath!=undefined){
+      |<span><a target='_blank' href='#{data.imgpath}'>查看图片</a></span>
+    -}
+script.
+  $(function(){
+      var bindUpload = function(){
+          $("#uploadFile").unbind().change(function() {
+              $.AFU({
+                  url: '/upload/pic',
+                  secureuri: false,
+                  fileElementId: $(this).attr("id"),
+                  success: function(data, status) {
+                      var res = {};
+                      try{
+                        res = eval("("+data+")");
+                      }catch(e){}
+                      $("#uploadResult").html("<span><a target='_blank' href='" + res.path + "'>" + res.name + "</a></span>");
+                      $("#uploadImgpath").val(res.path);
+                      bindUpload();
+                  },
+                  error: function(data, status, e) {
+                      alert("上传出错.");
+                  }
+              });
+          });
+      };
+      bindUpload();
+  });

@@ -1,0 +1,14 @@
+//- Created by 伟强 on 2015/3/14.
+-var selected = {};
+-var type = data&&data.type||conditions&&conditions.type||"";
+-selected[type]="selected";
+select#catid.required(name='type')
+  option(value='') 请选择
+  each val,key in global.category
+    -if((typeof val) =="string"){
+      -if(selected[key]){
+        option(value='#{key}',selected="selected" ) #{val}
+      -}else{
+        option(value='#{key}' ) #{val}
+      -}
+    -}

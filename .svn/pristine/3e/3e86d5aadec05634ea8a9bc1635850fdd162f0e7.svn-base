@@ -1,0 +1,49 @@
+var express = require('express');
+var router = express.Router();
+var path = require('path');
+var utils = require("../utils");
+var BlogModel = require("../models/blogs");
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    utils.handleFrontList(req, res, next,"life");
+});
+router.get('/:id', function(req, res, next) {
+    var id = req.params["id"];
+    if(id){
+        BlogModel.findOne({_id:id},function(err,data){
+            if(err){
+                handleError(err,next);
+            }else{
+                var time = data.time;
+                var sortParam = [['_id', -1]];
+                BlogModel.findOne({time:{
+                    "$gt": time
+                }}, "_id title",sortParam ,function(err,nextblog){
+                    if(err){
+                        handleError(err,next);
+                    }else{
+                        BlogModel.findOne({time:{
+                            "$lt": time
+                        }}, "_id title",sortParam,function(err,prevblog){
+                            if(err){
+                                handleError(err,next);
+                            }else{
+                                res.render('blog', { title: data.title ,
+                                    prev:prevblog,
+                                    next:nextblog,
+                                    data:data });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+});
+function handleError(err,next){
+    console.log(err);
+    next(err);
+}
+
+module.exports = router;

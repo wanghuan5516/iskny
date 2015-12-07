@@ -1,0 +1,86 @@
+extend layout/default
+block head
+  |<meta name="baidu-site-verification" content="yM6a8ppSEB" />
+  link(href='/css/index.css', rel='stylesheet')
+block header
+  .banner
+    section.box
+      ul.texts
+        p 打了死结的青春，捆死一颗苍白绝望的灵魂。
+        p 为自己掘一个坟墓来葬心，红尘一梦，不再追寻。
+        p 加了锁的青春，不会再因谁而推开心门。
+      .avatar
+        a(href='/about')
+          span 一笑阑珊
+block content
+  article
+    h2.title_tj
+      p
+        | 文章
+        span 推荐
+    .bloglist.left
+      each item,index in datas
+        h3
+          a(title='#{item.title}', href='/blog/#{item._id}') #{item.title}
+        -var img = "/images/default.jpg";
+        -if(item.imgpath&&item.imgpath!='undefined')img=item.imgpath;
+        figure
+          img(src='#{img}')
+        ul
+          p
+            | !{item.content.limit(300)}
+          a.readmore(title='#{item.title}', href='/blog/#{item._id}') 阅读全文>>
+        p.dateview
+          span #{item.time.format()}
+          span 作者：#{item.author}
+          span
+            | 个人博客：[
+            a(href='/cate') #{cate.getCate(item.type)}
+            | ]
+    aside.right
+      .weather
+        iframe(width='250', scrolling='no', height='60', frameborder='0', allowtransparency='true', rel="nofollow", src='http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=1')
+      .news
+        h3
+          p
+            | 最新
+            span 文章
+        ul.rank
+          each blog,index in global.cache_blog["new"]
+            li
+              a(href='/blog/#{blog._id}', title='#{blog.title}', target='_blank') #{blog.title}
+        h3.ph
+          p
+            | 点击
+            span 排行
+        ul.paih
+          each blog,index in global.cache_blog["hot"]
+            li
+              a(href='/blog/#{blog._id}', title='#{blog.title}', target='_blank') #{blog.title}
+        h3.links
+          p
+            | 友情
+            span 链接
+        ul.website
+          li
+            a(href='http://www.yangqq.com/') 杨青个人博客
+          li
+            a(href='/') 谢泽文个人博客
+          li
+            a(href='/') 3DST技术网
+          li
+            a(href='/') 思衡网络
+      // Baidu Button BEGIN
+      #bdshare.bdshare_t.bds_tools_32.get-codes-bdshare
+        a.bds_tsina
+        a.bds_qzone
+        a.bds_tqq
+        a.bds_renren
+        span.bds_more
+        a.shareCount
+      script#bdshare_js(type='text/javascript', data='type=tools&uid=6574585').
+      script#bdshell_js(type='text/javascript').
+      script(type='text/javascript').
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      // Baidu Button END
+      a.weixin(href='/')  

@@ -1,0 +1,22 @@
+//-Created by 伟强 on 2015/3/14.
+.page
+  -if(pager.totals==0){
+    |暂无数据
+  -}else{
+    a(title='共#{pager.totals}条')
+      b #{pager.totals}
+    -if(pager.page!=pager.prev)
+      a(href="#{pageUrl.replace('page',1)}") <<
+      a(href="#{pageUrl.replace('page',pager.prev)}") <
+    -var pagerIndex = 0;
+    //-直接用for循环从from到to不行，不知道啥原因
+    each val,index in pager.pageIndex
+      -if(val==pager.page)
+        b #{val}
+      -else
+        a(href="#{pageUrl.replace('page',val)}") #{val}
+    -if(pager.page!=pager.next)
+      a(href="#{pageUrl.replace('page',pager.next)}") >
+      a(href="#{pageUrl.replace('page',pager.pages)}") >>
+  -}
+  //-|#{pager}测试的时候，看看这个里面都啥东西

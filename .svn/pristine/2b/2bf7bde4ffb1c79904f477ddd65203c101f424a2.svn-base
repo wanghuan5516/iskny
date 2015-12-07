@@ -1,0 +1,23 @@
+$(function(){
+    var bindUpload = function(){
+        $("#uploadFile").unbind().change(function() {
+            var objbox = $("#uploadResult");
+            $.AFU({
+                url: '/upload',
+                secureuri: false,
+                fileElementId: $(this).attr("id"),
+                success: function(data, status) {
+                    /*var picContentId = data.replace(".","_");
+                     objbox.append("<p id="+ picContentId +"><a target='_blank' href='/temp/" + data + "'>" + data + "</a>&nbsp;&nbsp;<a href='javascript:void(0);' onclick='D(\"" + data + "\",this)'>删除</a>&nbsp;&nbsp;</p>");
+                     $("#askpic_text").val($("#askpic_text").val() + data + "|");*/
+                    objbox.append(data);
+                    bindUpload();
+                },
+                error: function(data, status, e) {
+                    alert("上传出错.");
+                }
+            });
+        });
+    };
+    bindUpload();
+});

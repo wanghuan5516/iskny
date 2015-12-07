@@ -1,0 +1,19 @@
+extend layout/default
+block head
+  link(type='text/css', rel='stylesheet', href='/css/mood.css', media='screen')
+block content
+  .moodlist
+    h1.t_nav
+      span 删删写写，回回忆忆，虽无法行云流水，却也可碎言碎语。
+      a.n1(href='/') 网站首页
+      a.n2(href='/') 碎言碎语
+    .bloglist
+      each item,index in datas
+        ul.arrow_box
+          .sy
+            -var img = "/temp/upload_0389dc02d7de81a23a6dfe002084b39a.jpg";
+            -if(item.imgpath)img=item.imgpath;
+            img(src='#{img}')
+            p  !{item.content.limit(300)}
+          span.dateview #{item.time.format("yyyy-MM-dd hh:mm")}
+    include shared/pager_front

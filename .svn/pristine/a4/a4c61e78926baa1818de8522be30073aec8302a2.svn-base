@@ -1,0 +1,21 @@
+extends layout/default
+block head
+  link(type="text/css", rel="stylesheet", href="/css/404.css")
+block content
+  #wrap
+    div(style='text-align:center;')
+      -if(status==404){
+      img(src="/images/404.png", alt="404")
+      -}
+      |#{error}
+    #text
+      strong
+        span
+        a(href="/", target="_blank") 首页
+        a(href="javascript:history.back()") 返回上一页
+    .animate.below
+    .animate.above
+    div(style="text-align:center;")
+      p
+        |来源:&nbsp;
+        a(href="http://www.mycodes.net/", target="_blank") 源码之家

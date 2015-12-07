@@ -1,0 +1,75 @@
+extend layout/blogs
+block head
+  link(href='/css/style.css', rel='stylesheet')
+block blogs
+  .newblog.left
+    h2 仿新浪博客风格·梅——古典个人博客模板
+    p.dateview
+      span 发布时间：2013-11-04
+      span 作者：杨青
+      span
+        | 模板分类：[
+        a(href='/news/life/') 个人博客模板
+        | ]
+    figure
+      img(src='images/01.jpg')
+    ul.nlist
+      p
+        | 界面设计非原创，出自新浪博客风格·梅作者水云心。在原来的设计上增加了梅花飘落的flash动画。原设计的边界阴影部分用图片实现，本例采用css3新的规则属性，box-shadow
+      a.readmore(title='/', href='/', target='_blank') 详细信息>>
+    .line
+    h2 黑色质感时间轴html5个人博客模板
+    p.dateview
+      span 发布时间：2013-11-04
+      span 作者：杨青
+      span
+        | 模板分类：[
+        a(href='/news/life/') 个人博客模板
+        | ]
+    figure
+      img(src='images/02.jpg')
+    ul.nlist
+      p
+        | 黑色时间轴html5个人博客模板颜色以黑色为主色，添加了彩色作为网页的一个亮点，导航高亮显示、banner图片鼠标划过，可以看到隐藏的文字。css3动画应用在banner和右边“我的名片”个人信息。重点在时间轴部分，三角形和圆形均是css代码写出来的，postion定位，增加页面返回到顶部的代码....
+      a.readmore(title='/', href='/', target='_blank') 详细信息>>
+    .line
+    h2 Green绿色小清新的夏天-个人博客模板
+    p.dateview
+      span 发布时间：2013-11-04
+      span 作者：杨青
+      span
+        | 模板分类：[
+        a(href='/news/life/') 个人博客模板
+        | ]
+    figure
+      img(src='images/03.jpg')
+    ul.nlist
+      p
+        | 这是一个有关Green绿色小清新的夏天的css3 html5绿色个人博客网站模板，导航下面的效果使用了CSS3 Animation 实现对象从右到左渐变的动画效果。
+      a.readmore(title='/', href='/', target='_blank') 详细信息>>
+    .line
+    h2 女生清新个人博客网站模板
+    p.dateview
+      span 发布时间：2013-11-04
+      span 作者：杨青
+      span
+        | 模板分类：[
+        a(href='/news/life/') 个人博客模板
+        | ]
+    figure
+      img(src='images/04.jpg')
+    ul.nlist
+      p
+        | 这是一个html5+css个人博客模板，顶部导航用了css3的gradient背景颜色渐变效果，结合js，对当前栏目高亮显示并且skew水平倾斜的效果。左侧头像也用了css3鼠标放上去滑动出文字的效果...
+      a.readmore(title='/', href='/', target='_blank') 详细信息>>
+    .line
+    .blank
+    .ad
+      img(src='images/ad.png')
+    .page
+      a(title='Total record')
+        b 41
+      b 1
+      a(href='/news/s/index_2.html') 2
+      a(href='/news/s/index_2.html') >
+      a(href='/news/s/index_2.html') >>

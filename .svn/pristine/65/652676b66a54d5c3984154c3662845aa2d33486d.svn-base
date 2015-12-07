@@ -1,0 +1,8 @@
+extend layout/default
+block head
+  link(type='text/css', rel='stylesheet', href='/css/about.css', media='screen')
+block content
+  #mainwrap
+    #cardstyle
+      #menuwrap
+       玩命施工中。。。大家先绕道看别的吧~

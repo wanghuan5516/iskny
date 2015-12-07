@@ -1,0 +1,160 @@
+//
+   Created by 伟强 on 2015/3/8.
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title 『豪情』后台管理
+    link(rel='stylesheet', type='text/css', href='css/common.css')
+    link(rel='stylesheet', type='text/css', href='css/main.css')
+    script(type='text/javascript', src='js/libs/modernizr.min.js')
+  body
+    .topbar-wrap.white
+      .topbar-inner.clearfix
+        .topbar-logo-wrap.clearfix
+          h1.topbar-logo.none
+            a.navbar-brand(href='index.html') 后台管理
+          ul.navbar-list.clearfix
+            li
+              a.on(href='index.html') 首页
+            li
+              a(href='http://www.mycodes.net/', target='_blank') 网站首页
+        .top-info-wrap
+          ul.top-info-list.clearfix
+            li
+              a(href='#') 管理员
+            li
+              a(href='#') 修改密码
+            li
+              a(href='#') 退出
+    .container.clearfix
+      .sidebar-wrap
+        .sidebar-title
+          h1 菜单
+        .sidebar-content
+          ul.sidebar-list
+            li
+              a(href='#')
+                i.icon-font 
+                | 常用操作
+              ul.sub-menu
+                li
+                  a(href='design.html')
+                    i.icon-font 
+                    | 作品管理
+                li
+                  a(href='design.html')
+                    i.icon-font 
+                    | 博文管理
+                li
+                  a(href='design.html')
+                    i.icon-font 
+                    | 分类管理
+                li
+                  a(href='design.html')
+                    i.icon-font 
+                    | 留言管理
+                li
+                  a(href='design.html')
+                    i.icon-font 
+                    | 评论管理
+                li
+                  a(href='design.html')
+                    i.icon-font 
+                    | 友情链接
+                li
+                  a(href='design.html')
+                    i.icon-font 
+                    | 广告管理
+            li
+              a(href='#')
+                i.icon-font 
+                | 系统管理
+              ul.sub-menu
+                li
+                  a(href='system.html')
+                    i.icon-font 
+                    | 系统设置
+                li
+                  a(href='system.html')
+                    i.icon-font 
+                    | 清理缓存
+                li
+                  a(href='system.html')
+                    i.icon-font 
+                    | 数据备份
+                li
+                  a(href='system.html')
+                    i.icon-font 
+                    | 数据还原
+      // /sidebar
+      .main-wrap
+        .crumb-wrap
+          .crumb-list
+            i.icon-font 
+            span 欢迎使用『豪情』博客程序，建博的首选工具。
+        .result-wrap
+          .result-title
+            h1 快捷操作
+          .result-content
+            .short-wrap
+              a(href='#')
+                i.icon-font 
+                | 新增作品
+              a(href='#')
+                i.icon-font 
+                | 新增博文
+              a(href='#')
+                i.icon-font 
+                | 新增作品分类
+              a(href='#')
+                i.icon-font 
+                | 新增博客分类
+              a(href='#')
+                i.icon-font 
+                | 作品评论
+        .result-wrap
+          .result-title
+            h1 系统基本信息
+          .result-content
+            ul.sys-info-list
+              li
+                label.res-lab 操作系统
+                span.res-info WINNT
+              li
+                label.res-lab 运行环境
+                span.res-info Apache/2.2.21 (Win64) PHP/5.3.10
+              li
+                label.res-lab PHP运行方式
+                span.res-info apache2handler
+              li
+                label.res-lab 静静设计-版本
+                span.res-info v-0.1
+              li
+                label.res-lab 上传附件限制
+                span.res-info 2M
+              li
+                label.res-lab 北京时间
+                span.res-info 2014年3月18日 21:08:24
+              li
+                label.res-lab 服务器域名/IP
+                span.res-info localhost [ 127.0.0.1 ]
+              li
+                label.res-lab Host
+                span.res-info 127.0.0.1
+        .result-wrap
+          .result-title
+            h1 使用帮助
+          .result-content
+            ul.sys-info-list
+              li
+                label.res-lab 官方交流网站：
+                span.res-info
+                  a(href='http://www.mycodes.net/', target='_blank') 源码之家
+              li
+                label.res-lab 官方交流QQ群：
+                span.res-info
+                  a.qq-link(target='_blank', href='http://shang.qq.com/wpa/qunwpa?idkey=4ba39c297a33fa548de56a257f6128c7c9e3dd14473e4c86557d93f2197c33e8')
+                    img(border='0', src='http://pub.idqqimg.com/wpa/images/group.png', alt='JS-前端开发', title='JS-前端开发')
+      // /main
+

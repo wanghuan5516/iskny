@@ -1,0 +1,30 @@
+//
+   Created by 伟强 on 2015/3/9.
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title 蜗牛名片后台管理
+    link(href='/css/admin_login.css', rel='stylesheet', type='text/css')
+  body
+    .admin_login_wrap
+      h1 后台管理
+      .adming_login_border
+        .admin_input
+          form(action='', method='post')
+            ul.admin_items
+              li
+                label(for='user') 用户名：
+                input#user.admin_input_style(type='text', name='username', value='admin', size='40')
+              li
+                label(for='pwd') 密码：
+                input#pwd.admin_input_style(type='password', name='password', value='admin', size='40')
+              li
+                input.btn.btn-primary(type='submit', tabindex='3', value='提交')
+              li
+                span #{info}
+      p.admin_copyright
+        a(tabindex='5', href='http://iskny.com/', target='_blank') 返回首页
+        |  © 2014 Powered by
+        a(href='http://iskny.com/', target='_blank') 蜗牛名片
+

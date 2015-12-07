@@ -1,0 +1,56 @@
+extends ../layout/admin
+block head
+  include ../shared/jquery
+  include ../shared/upload_head
+block content
+  -var url="/admin/blog",op="新增文章",data=locals.data||{};
+  -if(data._id){
+  -url=url+"/"+data._id;
+  -op="修改文章";}
+  .main-wrap
+    .crumb-wrap
+      .crumb-list
+        i.icon-font 
+        a(href='/admin') 首页
+        span.crumb-step >
+        a.crumb-name(href='/admin/blogs') 文章管理
+        span.crumb-step >
+        span= op
+        include ../shared/result_info
+    .result-wrap
+      .result-content
+        form#myform(action='#{url}', method='post', name='myform', enctype='application/x-www-form-urlencoded')
+          table.insert-tab(width='100%')
+            tbody
+              tr
+                th(width='120')
+                  i.require-red *
+                  | 分类：
+                td
+                  include ../shared/category_select
+              tr
+                th
+                  i.require-red *
+                  | 标题：
+                td
+                  input#title.common-text.required(name='title', size='50', value='#{data.title||"碎言碎语"}', type='text')
+              tr
+                th 作者：
+                td
+                  input.common-text(name='author', size='50', value='#{data.author||"admin"}', type='text')
+              tr
+                th
+                  i.require-red *
+                  | 缩略图：
+                td
+                  include ../shared/upload_html
+              tr
+                th 内容：
+                td
+                  textarea#content.common-textarea(name='content',cols='30',style='width: 98%;', rows='10') #{data.content}
+              tr
+                th
+                td
+                  input.btn.btn-primary.btn6.mr10(value='提交', type='submit')
+                  input.btn.btn6(onclick='window.location.href="/admin/blogs"', value='返回', type='button')
+    // /main

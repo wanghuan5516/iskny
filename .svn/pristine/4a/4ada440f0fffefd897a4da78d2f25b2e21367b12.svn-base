@@ -1,0 +1,9 @@
+/**
+ * Created by 伟强 on 2015/3/8.
+ */
+var utils = {};
+
+utils.path = function(p1,p2){
+    return require("path").join(p1,p2);
+};
+module.exports = utils;

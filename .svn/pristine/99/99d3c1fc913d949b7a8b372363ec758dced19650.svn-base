@@ -1,0 +1,22 @@
+var express = require('express');
+var router = express.Router();
+var utils = require('../utils');
+var formidable = require('formidable'),
+    path = require('path');
+var form = new formidable.IncomingForm();
+
+/* GET home page. */
+router.get('/', function(req, res) {
+  req.session.username="一笑阑珊";
+  res.render(utils.path(req.viewdir,'index'), { title: '首页',username:req.session.username });
+});
+
+router.post("/upload/:type",function(req,res){
+    var type = "pic"
+    if(req.params.type){
+        type = req.params.type;
+    }
+   require("../fileupload").parse(req,res,type);
+
+});
+module.exports = router;

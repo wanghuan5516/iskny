@@ -1,0 +1,49 @@
+extends ../layout/admin
+block head
+  include ../shared/jquery
+  include ../shared/upload_head
+  include ../shared/ueditor
+  script.
+    var ue = UE.getEditor('content');//实例化
+block content
+  -var url="/admin/user",op="新增用户",data=locals.data||{};
+  -if(data._id){
+  -url=url+"/"+data._id;
+  -op="修改用户";}
+  .main-wrap
+    .crumb-wrap
+      .crumb-list
+        i.icon-font 
+        a(href='/admin') 首页
+        span.crumb-step >
+        a.crumb-name(href='/admin/users') 用户管理
+        span.crumb-step >
+        span= op
+        include ../shared/result_info
+    .result-wrap
+      .result-content
+        form#myform(action='#{url}', method='post', name='myform')
+          table.insert-tab(width='100%')
+            tbody
+              tr
+                th(width='120')
+                  i.require-red *
+                  | 登录名：
+                td
+                  input#loginname.common-text.required(name='loginname', size='50', value='#{data.loginname||""}', type='text')
+              tr
+                th
+                  i.require-red *
+                  | 昵称：
+                td
+                  input#nickname.common-text.required(name='nickname', size='50', value='#{data.nickname||""}', type='text')
+              tr
+                th 密码：
+                td
+                  input#password.common-text.required(name='password', size='50', value='#{data.password||""}', type='text')
+              tr
+                th
+                td
+                  input.btn.btn-primary.btn6.mr10(value='提交', type='submit')
+                  input.btn.btn6(onclick='window.location.href="/admin/users"', value='返回', type='button')
+    // /main

@@ -1,0 +1,55 @@
+extends ../layout/admin
+
+block content
+  .main-wrap
+    .crumb-wrap
+      .crumb-list
+        i.icon-font 
+        a(href='/jscss/admin/design/') 首页
+        span.crumb-step >
+        a.crumb-name(href='/jscss/admin/design/') 作品管理
+        span.crumb-step >
+        span 新增作品
+    .result-wrap
+      .result-content
+        -var url="/admin/blog";
+        -if(blog!=undefined)url=url+"/"+blog._id;
+        form#myform(action='#{url}', method='post', name='myform', enctype='multipart/form-data')
+          table.insert-tab(width='100%')
+            tbody
+              tr
+                th(width='120')
+                  i.require-red *
+                  | 分类：
+                td
+                  select#catid.required(name='colId')
+                    option(value='') 请选择
+                    option(value='lefe') 慢生活
+                    option(value='doing') 碎言碎语
+              tr
+                th
+                  i.require-red *
+                  | 标题：
+                td
+                  input#title.common-text.required(name='title', size='50', value='', type='text')
+              tr
+                th 作者：
+                td
+                  input.common-text(name='author', size='50', value='admin', type='text')
+              tr
+                th
+                  i.require-red *
+                  | 缩略图：
+                td
+                  input(name='smallimg', id='', type='file')
+                  // <input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>
+              tr
+                th 内容：
+                td
+                  textarea#content.common-textarea(name='content', cols='30', style='width: 98%;', rows='10')
+              tr
+                th
+                td
+                  input.btn.btn-primary.btn6.mr10(value='提交', type='submit')
+                  input.btn.btn6(onclick='history.go(-1)', value='返回', type='button')
+    // /main

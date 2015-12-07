@@ -1,0 +1,224 @@
+extend ../layout/tools
+block head
+  link(href='/css/style.css', rel='stylesheet')
+  include ../shared/jquery
+  style.
+    .content{text-align:center;}
+    .container{width:100%;margin:0 auto;}
+    .r2h,.h2r{ font-size:14px;}
+    .r2h input,.h2r input{height:30px;}
+    .rgb{width:50px;}
+    .res{display:inline-block;width:30px;height:30px;}
+    .pick-container{position:relative;}
+    .color-box{display:inline-block;width:50px;height:50px;}
+    .color-pick{display:inline-block;width:256px;height:256px;background:#C7EDCC;margin:0 auto;font-size:0;}
+    .color-pick span{display:inline-block;margin:0;padding:0;}
+    .color-res{position:absolute; top:0;}
+    .color-res input{width:100px;height:30px;}
+    .hide{display:none;}
+    .pointer-container{position:absolute;width:100px;height:256px;left:498px;top:0;}
+    .color-b{position:absolute;width:4px;height:256px;top:0;left:50px; font-size:0;}
+    .color-b span{display:inline-block;margin:0;padding:0;width:4px;height:1px;}
+    .color-pointer{background-color:#f60;position:absolute;width:100px;height:1px;left:0;top:0;}
+    .pointer-holder{background-color:#f60;position:absolute;right:10px;width:30px; height:50px;margin:-30px;font-size:16px;text-align:center;padding-top:10px;cursor:pointer;}
+  script.
+    var boxwidth = 256;
+    var range = 32;//调色板个数
+    var step = parseInt(256 / range);//颜色渐变幅度
+    var b = 0;//rgb色b的值
+    var spWidth = boxwidth / range;//分的宽度
+    function getspan(x, y) {
+      return "<span x='" + x + "' y='" + y + "' style='background-color:rgb(" + x + "," + y + "," + b + ");width:" + spWidth + "px;height:" + spWidth + "px;'></span>";
+    }
+    function FillHtml(doc) {
+      var thtml = "";
+      for (var x = 0; x < 256;) {
+        for (var y = 0; y < 256;) {
+          thtml += getspan(x, y);
+          y += step;
+        }
+        x += step;
+      }
+      if (doc) {
+        document.write(thtml);
+      } else {
+        $("#pickBox").html(thtml);
+      }
+      var t2 = new Date().getTime();
+    }
+    function FillBColor() {
+      var thtml = "";
+      for (var x = 0; x < 256; x++) {
+        thtml += "<span z='" + x + "' style='background-color:rgb(0,0," + x + ");'></span>";
+      }
+      document.write(thtml);
+    }
+    $(function () {
+      var getHexStr = function (data) {
+        try {
+          var i = parseInt(data);
+          var res = i.toString(16).toString().toLowerCase();
+          return res.length == 2 ? res : "0" + res;
+        } catch (e) {
+          return "00";
+        }
+      }
+
+      function toHexStr(R, G, B) {
+        var ret = "";
+        $([R, G, B]).each(function (i, R) {
+          ret += getHexStr(R);
+        });
+        return ret;
+      }
+
+      $("#r2hBth").click(function () {
+        var right = true;
+        var obj = null;
+        $("[ref=r2]").each(function (i, n) {
+          var R = $(n).val();
+          if (!/^\\d+$/.test(R) || parseInt(R) < 0 || parseInt(R) > 255) {
+            right = false;
+            obj = n;
+            return right;
+          }
+        });
+        if (right) {
+          var res = "#" + toHexStr($("#R").val(), $("#G").val(), $("#B").val());
+          $("#Res").val(res);
+          $("#showColor").css({"background-color": res}).attr("title", res);
+        } else {
+          alert("数据有错");
+          $(obj).focus();
+        }
+      });
+      var toRgbStr = function (Hex) {
+        var r, g, b;
+        if (Hex.length == 3) {
+          r = Hex.substr(0, 1);
+          g = Hex.substr(1, 1);
+          b = Hex.substr(2, 1);
+          r += r;
+          g += g;
+          b += b;
+        } else {
+          r = Hex.substr(0, 2);
+          g = Hex.substr(2, 2);
+          b = Hex.substr(4, 2);
+        }
+        var res = parseInt(r, 16) + "," + parseInt(g, 16) + "," + parseInt(b, 16);
+        return res;
+      }
+      $("#h2rBth").click(function () {
+        var right = true;
+        var obj = null;
+        var Hex = $("#hexColor").val().replace('#', '');
+        if (!/^[0-9A-Fa-f]+$/.test(Hex) || (Hex.length != 3 && Hex.length != 6)) {
+          alert("数据错误");
+          $("#hexColor").focus();
+          return;
+        }
+        var res = toRgbStr(Hex);
+        $("#Res2").val(res);
+        $("#showColor2").css({"background-color": "rgb(" + res + ")"}).attr("title", res);
+      });
+      $("#pickBox span").hover(function (e) {
+        var res = [$(this).attr("x"), $(this).attr("y"), b].join(",");
+        var css = "rgb(" + res + ")";
+        $("#colorBox").css("background-color", css);
+      }).click(function () {
+        var r = $(this).attr("x"), g = $(this).attr("y");
+        var res = [r, g, b].join(",");
+        var css = "rgb(" + res + ")";
+        $("#pick_rgb").val(css);
+        $("#pick_hex").val("#" + toHexStr(r, g, b));
+        $("#pickBox_res").css({"background-color": css}).attr("title", res);
+      });
+      function Drag(obj) {
+        /*--------------拖曳效果----------------
+         *原理：标记拖曳状态dragging ,坐标位置iX, iY
+         * mousedown:fn(){dragging = true, 记录起始坐标位置，设置鼠标捕获}
+         * mouseover:fn(){判断如果dragging = true, 则当前坐标位置 - 记录起始坐标位置，绝对定位的元素获得差值}
+         * mouseup:fn(){dragging = false, 释放鼠标捕获，防止冒泡}
+         */
+        var dragging = false;
+        var iX, iY;
+        $(obj).mousedown(function (e) {
+          dragging = true;
+          iX = e.clientX - this.offsetLeft;
+          iY = e.clientY - this.offsetTop;
+          this.setCapture && this.setCapture();
+          return false;
+        });
+        document.onmousemove = function (e) {
+          if (dragging) {
+            var e = e || window.event;
+            var oX = e.clientX - iX;
+            var oY = e.clientY - iY;
+            oY = oY + 30;//30用来修正margin
+            if (oY > 256) oY = 256;
+            if (oY < 0) oY = 0;
+            b = oY;
+            $(obj).css({"top": oY + "px"});
+            $("#pointerDiv").css({"top": oY + "px"});
+            return false;
+          }
+        };
+        $(document).mouseup(function (e) {
+          dragging = false;
+          $(obj)[0].releaseCapture();
+          e.cancelBubble = true;
+          $("#pickBox span").css({
+            "background-color": function () {
+              var res = $(this).attr("x") + "," + $(this).attr("y") + "," + b;
+              return "rgb(" + res + ")";
+            }
+          });
+        })
+      }
+
+      Drag("#pointerHolder");
+    })
+
+block blogs
+  .newblog.left
+    .content
+      .container
+        .r2h
+          | RGB转Hex
+          input#R.rgb(type='text', placeholder='R', ref='r2')
+          input#G.rgb(type='text', placeholder='G', ref='r2')
+          input#B.rgb(type='text', placeholder='B', ref='r2')
+          input#r2hBth(type='button', value='转为16进制')
+          input#Res(type='text', placeholder='结果', readonly='')
+          span#showColor.res
+        .h2r
+          | Hex转RGB
+          input#hexColor(type='text', placeholder='16进制颜色')
+          input#h2rBth(type='button', value='转为rgb')
+          input#Res2(type='text', placeholder='R')
+          span#showColor2.res
+        .pick-container
+          #pickBox.color-pick(title='点击拾色')
+            script.
+              FillHtml(true);
+          #colorRes.color-res
+            | 鼠标颜色
+            span#colorBox.color-box
+            br
+            |                 RGB结果
+            input#pick_rgb(type='text', readonly='', placeholder='RGB结果')
+            br
+            |                 Hex结果
+            input#pick_hex(type='text', readonly='', placeholder='Hex结果')
+            br
+            |                 拾取颜色
+            #pickBox_res.color-box
+          .pointer-container
+            #bColorDiv.color-b
+              script.
+                FillBColor();
+            #pointerDiv.color-pointer
+            #pointerHolder.pointer-holder 游标
+        .hide
+          input(type='color')

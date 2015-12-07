@@ -1,0 +1,79 @@
+extends ../layout/admin
+block head
+  include ../shared/pager_head
+  script.
+    function deleteBlog(){
+        return confirm("确定要删除吗？");
+    }
+block content
+  .main-wrap
+    .crumb-wrap
+      .crumb-list
+        i.icon-font 
+        a(href='/admin') 首页
+        span.crumb-step >
+        span.crumb-name 文章管理
+        include ../shared/result_info
+    .search-wrap
+      .search-content
+        form(action='', method='get')
+          table.search-tab
+            tr
+              th(width='120') 选择分类:
+              td
+                include ../shared/category_select
+              th(width='70') 标题:
+              td
+                input.common-text(placeholder='标题', name='title', value='#{conditions.title||""}', id='', type='text')
+              td
+                input.btn.btn-primary.btn2( value='查询', type='submit')
+    .result-wrap
+      form#myform(name='myform', method='post')
+        .result-title
+          .result-list
+            a(href='blog')
+              i.icon-font 
+              | 新增作品
+            a#batchDel(href='javascript:void(0)')
+              i.icon-font 
+              | 批量删除
+            a#updateOrd(href='javascript:void(0)')
+              i.icon-font 
+              | 更新排序
+        .result-content
+          -var from = 1;
+          table.result-tab(width='100%')
+            tr
+              th.tc(width='5%')
+                input.allChoose(name='', type='checkbox')
+              th 排序
+              th 序号
+              th 标题
+              th 审核状态
+              th 点击
+              th 发布人
+              th 更新时间
+              th 评论
+              th 操作
+            each item,index in datas
+              tr(title='#{item.time.format()}')
+                td.tc
+                  input(name='id[]', value='#{item._id}', type='checkbox')
+                td
+                  input(name='ids[]', value='#{item._id}', type='hidden')
+                  input.common-input.sort-input(name='sort[]', value='#{item.sort}', type='text')
+                td #{index+from}
+                td
+                  a( href='/admin/blog/#{item._id}')
+                    span.red [#{item.type}]
+                    |#{item.title.limit(10)}
+                td #{item.state}
+                td #{item.clicks}
+                td #{item.author}
+                td #{item.time.format()}
+                td
+                  a(href="/blog/#{item._id}") 查看
+                td
+                  a.link-del(href='/admin/blog/#{item._id}/delete',onclick="return deleteBlog();") 删除
+          include ../shared/pager_html
+    // /main

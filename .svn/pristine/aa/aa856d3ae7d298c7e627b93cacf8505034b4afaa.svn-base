@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title #{title}|我的私藏|个人信息整理
+    meta(name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0,user-scalable=no")
+    meta(name='keywords', content='蜗牛名片|蜗牛私信|个人博客|#{data.title}|#{data.keywords}')
+    meta(name='description', content='私人信息整理，我的私人档案;#{data.content.limit(20)}')
+    link(href='/css/ixuejiao.css', rel='stylesheet')
+body
+article.blogs
+  .index_about
+    h2.c_titile #{data.title}
+    p.box_c
+      span.d_time 发布时间：#{data.time.format()}
+      span 编辑：#{data.author}
+      span 浏览：#{data.clicks}
+    ul.infos
+      | !{data.content}
+    .keybq
+      p
+        span 关键字词
+        | ：#{data.keywords||'量身定做的爱'}
+  footer
+    p
+      | Powered by
+      a(href='') 一笑阑珊
+      |&nbsp;
+      a(target='_blank', href='http://www.miitbeian.gov.cn/') #{_beian||'豫ICP备15004495号-2'}

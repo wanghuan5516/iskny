@@ -1,0 +1,2 @@
+//-Created by 伟强 on 2015/3/15.
+span.red#result_info #{info||data&&data.info}
